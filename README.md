@@ -88,3 +88,7 @@ more than two dilutes compliance.
    it to show its evidence — which also makes its *failures* visible (you'll see "UNVERIFIABLE"
    and thin failure scenarios instead of false assurance). That visibility is the real upgrade:
    you'll know when to distrust the answer.
+
+## License
+
+[MIT](LICENSE)
