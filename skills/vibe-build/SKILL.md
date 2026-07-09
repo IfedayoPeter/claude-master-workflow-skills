@@ -1,6 +1,6 @@
 ---
 name: vibe-build
-description: Use after a PRD/spec exists (e.g. produced by product-recon) to implement it — greenfield builds or major feature waves. Forces spec-as-source-of-truth vibe-coding with discipline - boring-stack foundation, a persistent Build.md of end-to-end vertical slices starting with a walking skeleton, a run-it-like-a-user loop per slice composed with test-first / ui-excellence / durability-check, commit checkpoints, a three-strikes revert rule instead of layered patches, and a final FR-by-FR gap-check. Distilled from the instruction sets of Lovable, Bolt, Cursor, Kiro, GitHub Spec Kit, and practitioner vibe-coding workflows.
+description: Use after a PRD/spec exists (e.g. produced by product-recon) to implement it — greenfield builds or major feature waves. Forces spec-as-source-of-truth vibe-coding with discipline - a user-confirmed stack (existing projects keep their existing stack; greenfield gets a boring-by-default proposal the user approves), a persistent Build.md of end-to-end vertical slices starting with a walking skeleton, a run-it-like-a-user loop per slice composed with test-first / ui-excellence / durability-check, commit checkpoints, a three-strikes revert rule instead of layered patches, and a final FR-by-FR gap-check. Distilled from the instruction sets of Lovable, Bolt, Cursor, Kiro, GitHub Spec Kit, and practitioner vibe-coding workflows.
 ---
 
 ROLE: You are implementing a product from its spec — PRD.md and DataDictionary.md (produced by
@@ -12,10 +12,15 @@ a lot of code.
 PHASE 0 — INTAKE & FOUNDATION.
 1. Read the PRD and data dictionary in full. No spec → stop and produce one first (product-recon
    skill) or ask for it. Vibe-code the implementation, never the requirements.
-2. Choose the most BORING stack that satisfies the non-functional requirements: one mature,
-   batteries-included framework; one database; an established UI library; no microservices for a
-   first build. State the stack and its environmental constraints upfront. Every new dependency
-   needs a one-line justification tied to an FR.
+2. STACK CONFIRMATION — never choose the stack unilaterally. EXISTING project → adopt the stack
+   already in the codebase (run arch-recon first so the slices match its architecture and
+   dialect); introducing or switching a language/framework requires the user's explicit approval.
+   GREENFIELD → propose ONE recommended stack that satisfies the non-functional requirements —
+   defaulting to boring: one mature, batteries-included framework, one database, an established
+   UI library, no microservices for a first build — name one alternative, and ASK the user to
+   confirm the language and framework BEFORE any scaffolding. State the confirmed stack's
+   environmental constraints upfront. Every new dependency needs a one-line justification tied
+   to an FR.
 3. Start the project rules file (CLAUDE.md or the tool's equivalent): stack conventions, the
    exact run/test commands, style rules. This file is ACCUMULATIVE — any mistake made twice
    becomes a rule here so it is never made a third time.
@@ -49,8 +54,9 @@ PHASE 3 — STUCK RULE (three strikes, then revert).
 11. When a fix for a broken slice fails, you get ONE more targeted attempt. If that fails too:
     STOP patching. Revert to the last green commit, paste the exact error, write at least two
     distinct hypotheses, and take a different approach (different design, different library,
-    smaller slice). Stacking patch on patch is how vibe-coded apps rot into unfixable mud;
-    reverting is cheaper than archaeology.
+    smaller slice). If the failure sits in PRE-EXISTING code, run bug-hunt on that area and
+    fix-design for what it confirms instead of guessing. Stacking patch on patch is how
+    vibe-coded apps rot into unfixable mud; reverting is cheaper than archaeology.
 
 PHASE 4 — SCOPE & DRIFT GUARDS.
 - Every piece of code traces to an FR. Mid-build ideas go to an Ideas parking-lot section in

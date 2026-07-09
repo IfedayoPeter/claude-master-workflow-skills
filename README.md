@@ -1,15 +1,17 @@
 # Master Workflow Skills for Claude Code
 
-Ten discipline skills that force rigorous engineering behavior — verified architecture maps,
-adversarial bug hunts, test-first implementation, researched PRDs, disciplined vibe-coding,
-honest verification reporting — instead of plausible-sounding shortcuts. They were written so smaller/faster models produce work closer to a
+Eleven skills: ten discipline skills that force rigorous engineering behavior — verified
+architecture maps, adversarial bug hunts, test-first implementation, researched PRDs,
+disciplined vibe-coding, honest verification reporting — plus `master-workflow`, the router
+that dispatches tasks to the right skill, chains them into pipelines, and enforces the
+user-approval gates between them. They were written so smaller/faster models produce work closer to a
 frontier model's, but they sharpen any model.
 
 Each skill is a forced procedure with a required output format and **banned phrases** ("should
 work", "looks good", "tests to follow"). The format is the load-bearing part: it makes shallow
 work visibly incomplete rather than just discouraged.
 
-## The 10 skills
+## The 11 skills
 
 | Skill | Use when |
 |---|---|
@@ -22,7 +24,8 @@ work visibly incomplete rather than just discouraged.
 | `ui-excellence` | Designing or building any UI (screens, components, styling, layout) |
 | `test-first` | **Before** implementing any new code — the test is written and observed to FAIL before the first line of implementation exists |
 | `product-recon` | Stepping into a new/early-stage project: live-web research of ≥5 linked comparable projects, a feature matrix, PRD.md + DataDictionary.md, and an FR-by-FR gap-check against any existing implementation |
-| `vibe-build` | Implementing a product from a PRD/spec: boring-stack foundation, vertical slices from a walking skeleton, run-it-like-a-user verification per slice, three-strikes revert rule, final FR-by-FR gap-check — distilled from the instruction sets of Lovable, Bolt, Cursor, Kiro, and GitHub Spec Kit |
+| `vibe-build` | Implementing a product from a PRD/spec: user-confirmed stack (existing projects keep their stack), vertical slices from a walking skeleton, run-it-like-a-user verification per slice, three-strikes revert rule, final FR-by-FR gap-check — distilled from the instruction sets of Lovable, Bolt, Cursor, Kiro, and GitHub Spec Kit |
+| `master-workflow` | The router: dispatch table + tie-breakers deciding which skill fits, the canonical chains (greenfield, existing project, bug report, performance, claim audit), user-approval gates, and composition rules |
 
 ## Install
 
@@ -58,9 +61,10 @@ Skills trigger far more reliably when your project's `CLAUDE.md` makes them comp
 ```markdown
 ## Mandatory Skill Usage
 
-When a task matches one of the 10 domains below, invoking the matching skill is **compulsory** —
+When a task matches one of the 11 domains below, invoking the matching skill is **compulsory** —
 do not work from memory/guessing on these task types. Match by task shape, not just by the user
-literally naming the skill.
+literally naming the skill. When unsure which skill fits, or a task spans several, invoke
+`master-workflow` first — it routes, chains, and defines the approval gates.
 
 | Task shape | Skill to invoke |
 |---|---|
@@ -74,6 +78,7 @@ literally naming the skill.
 | Implementing any new code (feature, behavior, bug fix) — invoke BEFORE the first line is written | `test-first` |
 | Stepping into a new/early-stage project: online research of ≥5 comparables, PRD + data dictionary, gap-check vs implementation | `product-recon` |
 | Implementing a product from a PRD/spec (greenfield build or major feature wave) in verified vertical slices | `vibe-build` |
+| Unsure which skill fits, several apply, or a full pipeline is starting (research → build → verify) | `master-workflow` |
 ```
 
 ## Using them outside Claude Code
