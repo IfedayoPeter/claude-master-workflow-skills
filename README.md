@@ -1,15 +1,15 @@
 # Master Workflow Skills for Claude Code
 
-Eight discipline skills that force rigorous engineering behavior — verified architecture maps,
-adversarial bug hunts, test-first implementation, honest verification reporting — instead of
-plausible-sounding shortcuts. They were written so smaller/faster models produce work closer to a
+Nine discipline skills that force rigorous engineering behavior — verified architecture maps,
+adversarial bug hunts, test-first implementation, researched PRDs, honest verification
+reporting — instead of plausible-sounding shortcuts. They were written so smaller/faster models produce work closer to a
 frontier model's, but they sharpen any model.
 
 Each skill is a forced procedure with a required output format and **banned phrases** ("should
 work", "looks good", "tests to follow"). The format is the load-bearing part: it makes shallow
 work visibly incomplete rather than just discouraged.
 
-## The 8 skills
+## The 9 skills
 
 | Skill | Use when |
 |---|---|
@@ -21,6 +21,7 @@ work visibly incomplete rather than just discouraged.
 | `fact-check` | Verifying a claim: doc-vs-code, config defaults, numbers/thresholds |
 | `ui-excellence` | Designing or building any UI (screens, components, styling, layout) |
 | `test-first` | **Before** implementing any new code — the test is written and observed to FAIL before the first line of implementation exists |
+| `product-recon` | Stepping into a new/early-stage project: live-web research of ≥5 linked comparable projects, a feature matrix, PRD.md + DataDictionary.md, and an FR-by-FR gap-check against any existing implementation |
 
 ## Install
 
@@ -56,7 +57,7 @@ Skills trigger far more reliably when your project's `CLAUDE.md` makes them comp
 ```markdown
 ## Mandatory Skill Usage
 
-When a task matches one of the 8 domains below, invoking the matching skill is **compulsory** —
+When a task matches one of the 9 domains below, invoking the matching skill is **compulsory** —
 do not work from memory/guessing on these task types. Match by task shape, not just by the user
 literally naming the skill.
 
@@ -70,6 +71,7 @@ literally naming the skill.
 | Verifying a claim, doc-vs-code check, validating a number/threshold | `fact-check` |
 | Designing or building any UI (screens, components, styling, layout) | `ui-excellence` |
 | Implementing any new code (feature, behavior, bug fix) — invoke BEFORE the first line is written | `test-first` |
+| Stepping into a new/early-stage project: online research of ≥5 comparables, PRD + data dictionary, gap-check vs implementation | `product-recon` |
 ```
 
 ## Using them outside Claude Code
