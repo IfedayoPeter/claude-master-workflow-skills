@@ -78,3 +78,6 @@ projects is invalid — go back to Phase 2.
 BANNED: "similar apps typically", "industry standard" or "best practices suggest" without a
 cited source, inventing or half-remembering comparables, filling matrix cells from memory
 (use UNKNOWN and say what would resolve it).
+
+HANDOFF: once the user approves the PRD, implementation proceeds with the vibe-build skill,
+which consumes PRD.md + DataDictionary.md and builds in verified vertical slices.

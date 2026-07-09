@@ -1,15 +1,15 @@
 # Master Workflow Skills for Claude Code
 
-Nine discipline skills that force rigorous engineering behavior — verified architecture maps,
-adversarial bug hunts, test-first implementation, researched PRDs, honest verification
-reporting — instead of plausible-sounding shortcuts. They were written so smaller/faster models produce work closer to a
+Ten discipline skills that force rigorous engineering behavior — verified architecture maps,
+adversarial bug hunts, test-first implementation, researched PRDs, disciplined vibe-coding,
+honest verification reporting — instead of plausible-sounding shortcuts. They were written so smaller/faster models produce work closer to a
 frontier model's, but they sharpen any model.
 
 Each skill is a forced procedure with a required output format and **banned phrases** ("should
 work", "looks good", "tests to follow"). The format is the load-bearing part: it makes shallow
 work visibly incomplete rather than just discouraged.
 
-## The 9 skills
+## The 10 skills
 
 | Skill | Use when |
 |---|---|
@@ -22,6 +22,7 @@ work visibly incomplete rather than just discouraged.
 | `ui-excellence` | Designing or building any UI (screens, components, styling, layout) |
 | `test-first` | **Before** implementing any new code — the test is written and observed to FAIL before the first line of implementation exists |
 | `product-recon` | Stepping into a new/early-stage project: live-web research of ≥5 linked comparable projects, a feature matrix, PRD.md + DataDictionary.md, and an FR-by-FR gap-check against any existing implementation |
+| `vibe-build` | Implementing a product from a PRD/spec: boring-stack foundation, vertical slices from a walking skeleton, run-it-like-a-user verification per slice, three-strikes revert rule, final FR-by-FR gap-check — distilled from the instruction sets of Lovable, Bolt, Cursor, Kiro, and GitHub Spec Kit |
 
 ## Install
 
@@ -57,7 +58,7 @@ Skills trigger far more reliably when your project's `CLAUDE.md` makes them comp
 ```markdown
 ## Mandatory Skill Usage
 
-When a task matches one of the 9 domains below, invoking the matching skill is **compulsory** —
+When a task matches one of the 10 domains below, invoking the matching skill is **compulsory** —
 do not work from memory/guessing on these task types. Match by task shape, not just by the user
 literally naming the skill.
 
@@ -72,6 +73,7 @@ literally naming the skill.
 | Designing or building any UI (screens, components, styling, layout) | `ui-excellence` |
 | Implementing any new code (feature, behavior, bug fix) — invoke BEFORE the first line is written | `test-first` |
 | Stepping into a new/early-stage project: online research of ≥5 comparables, PRD + data dictionary, gap-check vs implementation | `product-recon` |
+| Implementing a product from a PRD/spec (greenfield build or major feature wave) in verified vertical slices | `vibe-build` |
 ```
 
 ## Using them outside Claude Code
