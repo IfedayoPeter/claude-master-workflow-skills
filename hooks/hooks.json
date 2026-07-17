@@ -1,0 +1,17 @@
+{
+  "description": "Injects the mandatory master-workflow skill-routing rules at the start of every session, so the model routes tasks through the skills without being told.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"${CLAUDE_PLUGIN_ROOT}/hooks/master-workflow-reminder.json\"",
+            "timeout": 10,
+            "statusMessage": "Loading master-workflow routing rules"
+          }
+        ]
+      }
+    ]
+  }
+}

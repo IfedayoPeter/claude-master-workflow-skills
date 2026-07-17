@@ -31,34 +31,58 @@ work visibly incomplete rather than just discouraged.
 
 ## Install
 
-Each skill is a folder containing a single `SKILL.md`. Copy the folders into a skills directory
-Claude Code scans:
+Every install path sets up two things: the **12 skills**, and a **SessionStart hook** that
+injects the mandatory routing rules into every session — so Claude routes tasks through the
+skills automatically instead of waiting to be told.
 
-- **Personal (all your projects):** `~/.claude/skills/`
-- **Per project (shared with your team via the repo):** `<project>/.claude/skills/`
+### Option A — Plugin (recommended: one command, hook auto-configured)
 
-### macOS / Linux
+Inside Claude Code:
+
+```
+/plugin marketplace add IfedayoPeter/claude-master-workflow-skills
+/plugin install master-workflow-skills@master-workflow-skills
+```
+
+Installing the plugin loads all 12 skills AND activates the SessionStart routing hook — no
+settings editing, and uninstalling the plugin cleanly removes both.
+
+### Option B — Install script (copies skills + merges the hook into your settings)
+
+macOS / Linux:
 
 ```bash
 git clone https://github.com/IfedayoPeter/claude-master-workflow-skills.git
-cp -r claude-master-workflow-skills/skills/* ~/.claude/skills/
+cd claude-master-workflow-skills && ./install.sh
 ```
 
-### Windows (PowerShell)
+Windows (PowerShell):
 
 ```powershell
 git clone https://github.com/IfedayoPeter/claude-master-workflow-skills.git
-New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
-Copy-Item -Recurse -Force claude-master-workflow-skills\skills\* "$HOME\.claude\skills\"
+cd claude-master-workflow-skills; .\install.ps1
 ```
+
+The script copies the skills to `~/.claude/skills/`, the hook payload to `~/.claude/hooks/`,
+and merges the SessionStart hook into `~/.claude/settings.json` (idempotent — safe to re-run
+after a `git pull` to update).
+
+### Option C — Manual copy (skills only, no hook)
+
+Copy the `skills/*` folders into `~/.claude/skills/` (personal) or
+`<project>/.claude/skills/` (shared with your team via the repo). Without the hook, skills
+still trigger by description matching and `/<skill-name>` — just less reliably; see
+"Make them mandatory" below.
 
 Restart Claude Code (or start a new session) and the skills appear in the available-skills list.
 Invoke one explicitly with `/<skill-name>` (e.g. `/test-first`), or let Claude match them by task
 shape.
 
-## Make them mandatory (recommended)
+## Make them mandatory (belt-and-suspenders)
 
-Skills trigger far more reliably when your project's `CLAUDE.md` makes them compulsory. Add:
+Options A and B already enforce routing via the SessionStart hook. For extra reinforcement —
+or if you installed via manual copy — add this to your project's `CLAUDE.md` (or
+`~/.claude/CLAUDE.md` for all projects):
 
 ```markdown
 ## Mandatory Skill Usage

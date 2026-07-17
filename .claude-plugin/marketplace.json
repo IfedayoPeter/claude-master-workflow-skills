@@ -1,0 +1,14 @@
+{
+  "name": "master-workflow-skills",
+  "owner": {
+    "name": "Ifedayo Peter",
+    "url": "https://github.com/IfedayoPeter"
+  },
+  "plugins": [
+    {
+      "name": "master-workflow-skills",
+      "source": "./",
+      "description": "12 discipline skills plus a SessionStart hook that enforces routing every task through them."
+    }
+  ]
+}

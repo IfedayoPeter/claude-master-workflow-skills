@@ -1,0 +1,6 @@
+{
+  "hookSpecificOutput": {
+    "hookEventName": "SessionStart",
+    "additionalContext": "MANDATORY SKILL ROUTING (user-configured, applies to every session): When a task matches one of these shapes, invoking the matching skill via the Skill tool is COMPULSORY before working from memory — match by task shape, not by whether the user names the skill. Unfamiliar codebase/architecture -> arch-recon. Hunting bugs/auditing correctness -> bug-hunt. Scale/capacity questions -> scalability-audit. Fixing a known defect -> fix-design. After any code change, before done -> durability-check. Verifying a claim/doc/number -> fact-check. Designing or building ANY UI -> ui-excellence. Frontend with 3+ screens, or user wants designs/mockups first -> ui-design-preview (hard approval gate before FE code). About to write any new code -> test-first. New/early-stage project, PRD needed -> product-recon (includes Azure DevOps backlog). Implementing from a PRD/spec -> vibe-build (stack + mobile question, auth toggle, /docs page). Unsure which fits, several apply, or a full pipeline is starting -> invoke master-workflow FIRST and follow its chains and gates. Routing without invoking is a violation."
+  }
+}
