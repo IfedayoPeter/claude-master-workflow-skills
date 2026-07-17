@@ -1,6 +1,6 @@
 ---
 name: product-recon
-description: Use when stepping into a new or early-stage project (e.g. "chicktrack") to establish what it is and what it should be. Forces deep ONLINE research of at least 5 comparable real-world projects (with links; code analyzed where public), a feature matrix, then two artifacts - PRD.md with numbered, traceable functional requirements and DataDictionary.md with every entity/field/relationship. If an implementation exists, every requirement is gap-checked against the code as IMPLEMENTED / PARTIAL / MISSING / CONTRADICTED with a ranked gap list.
+description: Use when stepping into a new or early-stage project (e.g. "chicktrack") to establish what it is and what it should be. Forces deep ONLINE research of at least 5 comparable real-world projects (with links; code analyzed where public), a feature matrix, then three artifacts - PRD.md with numbered, traceable functional requirements, DataDictionary.md with every entity/field/relationship, and an Azure DevOps-importable backlog (Backlog.md + Backlog_devops.csv with Epic/User Story hierarchy, every item traced to FR numbers). If an implementation exists, every requirement is gap-checked against the code as IMPLEMENTED / PARTIAL / MISSING / CONTRADICTED with a ranked gap list.
 ---
 
 ROLE: You are performing product reconnaissance on a project. Your goal is a PRD and a data
@@ -42,7 +42,7 @@ PHASE 3 — FEATURE MATRIX.
    HAS / PARTIAL / ABSENT / UNKNOWN. A feature enters the PRD only via this matrix or an
    explicit stakeholder requirement — never by brainstorm.
 
-PHASE 4 — WRITE THE TWO ARTIFACTS.
+PHASE 4 — WRITE THE THREE ARTIFACTS.
 7. PRD.md, all sections mandatory: Overview & problem statement; Target users & personas;
    Comparable-projects analysis (the full list WITH links, per-project notes, and the feature
    matrix); Functional requirements numbered FR-1..FR-n, each traceable to a matrix row or a
@@ -55,6 +55,21 @@ PHASE 4 — WRITE THE TWO ARTIFACTS.
    an implementation exists, otherwise from the comparables' data concepts plus the FRs. Every
    entity must trace to at least one FR — an entity no requirement needs gets flagged, not
    silently included.
+8b. THE BACKLOG (always, immediately after the PRD): convert the FRs into a work backlog in
+   two forms.
+   - Backlog.md: human-readable — Epics grouped by product area, each containing User
+     Stories with description, acceptance criteria, priority, and the FR numbers they trace
+     to. Gap-list items (Phase 5) join the backlog too, highest-ranked first.
+   - Backlog_devops.csv: the SAME items in Azure DevOps web-import format, exact header:
+     "Work Item Type","Title 1","Title 2","Description","Acceptance Criteria","Priority","Tags"
+     Rules that make the import actually work: Epics fill "Title 1" with "Title 2" empty;
+     their child User Stories fill "Title 2" with "Title 1" empty and must appear on the rows
+     immediately following their Epic (row order IS the hierarchy); Description and
+     Acceptance Criteria are plain sentences (no markdown); Priority is 1–4; Tags are
+     semicolon-separated (e.g. "backend;security"); every Description names its FR numbers
+     ("Traces: FR-12, FR-13") so DevOps items stay traceable to the PRD. Quote every field.
+   Every backlog item traces to an FR or a ranked gap; an item that traces to neither is
+   scope invention and gets cut.
 
 PHASE 5 — GAP-CHECK (only when an implementation exists).
 9. Cross-check every FR against the code and give a verdict: IMPLEMENTED (cite file/endpoint),
@@ -71,13 +86,15 @@ RULES:
 - If web access is unavailable, STOP and report that — a PRD assembled from memory must never
   be presented as researched.
 
-OUTPUT: (a) PRD.md, (b) DataDictionary.md, (c) if an implementation exists, the FR verdict
-table plus the ranked gap list, (d) a research log: every search query and every source
-consulted, including dead ends. A PRD whose comparable section contains fewer than 5 linked
+OUTPUT: (a) PRD.md, (b) DataDictionary.md, (c) Backlog.md + Backlog_devops.csv, (d) if an
+implementation exists, the FR verdict table plus the ranked gap list, (e) a research log:
+every search query and every source consulted, including dead ends. A PRD whose comparable section contains fewer than 5 linked
 projects is invalid — go back to Phase 2.
 BANNED: "similar apps typically", "industry standard" or "best practices suggest" without a
 cited source, inventing or half-remembering comparables, filling matrix cells from memory
 (use UNKNOWN and say what would resolve it).
 
-HANDOFF: once the user approves the PRD, implementation proceeds with the vibe-build skill,
-which consumes PRD.md + DataDictionary.md and builds in verified vertical slices.
+HANDOFF: once the user approves the PRD, the backlog (already written) is ready to import
+into Azure DevOps, and implementation proceeds with the vibe-build skill, which consumes
+PRD.md + DataDictionary.md, runs ui-design-preview on the screens before frontend work, and
+builds in verified vertical slices.
