@@ -1,7 +1,7 @@
 {
   "name": "master-workflow-skills",
-  "version": "1.0.0",
-  "description": "12 discipline skills (arch-recon, bug-hunt, test-first, product-recon, vibe-build, ui-excellence, ui-design-preview, ...) plus a SessionStart hook that makes every session route tasks through them automatically.",
+  "version": "1.2.0",
+  "description": "19 discipline skills (arch-recon, bug-hunt, security-audit, scalability-audit, perf-profile, test-first, fix-design, refactor-safe, product-recon, vibe-build, ui-excellence, ui-design-preview, ats-cv, cover-letter, interview-prep, linkedin-optimizer, ...) plus a SessionStart hook that makes every session route tasks through them automatically.",
   "author": {
     "name": "Ifedayo Peter",
     "url": "https://github.com/IfedayoPeter"

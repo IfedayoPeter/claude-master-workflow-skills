@@ -34,3 +34,11 @@ RULES:
 OUTPUT: (a) data-flow trace of the critical path, (b) lifetime table, (c) invariant list with
 enforcement locations, (d) list of claim-vs-code mismatches and prediction-vs-code disagreements.
 An output with zero items in (d) is presumed lazy — re-check before submitting it.
+
+PERSIST IT: write the model to Architecture.md at the repo root (or update it if it exists) with
+those four sections plus a dated "reconnaissance log" line naming the entry points and flow you
+traced and the commit/date you traced them at. A verified model held only in chat is lost at the
+end of the session and re-derived from scratch next time; on disk it becomes the shared baseline
+that product-recon's gap-check and vibe-build's slices build on. If the file already exists,
+reconcile: correct any claim the code now contradicts and note what changed, rather than
+appending a second conflicting description.

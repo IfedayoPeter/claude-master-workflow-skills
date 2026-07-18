@@ -32,9 +32,19 @@ ALSO: grep the codebase for language-appropriate smells (blocking calls in async
 Now instead of UTC, floating point for money, locale-sensitive parsing/formatting, swallowed
 exceptions) and inspect each hit.
 
-OUTPUT FORMAT — every finding MUST include: file:line, one-sentence defect, and a CONCRETE
-failure scenario ("with input X in state Y, the result is Z instead of W"). A finding without a
-concrete failing input is a guess — either construct the input or drop the finding.
-BANNED: "looks good", "well-structured", "should be fine", "no obvious issues". If a full pass
-finds nothing, that is a suspicious result: do a second pass using a different category order
-before reporting. Report honestly if the second pass also finds nothing — but only after it runs.
+OUTPUT FORMAT — every finding MUST include: a SEVERITY rank, file:line, a one-sentence defect,
+and a CONCRETE failure scenario ("with input X in state Y, the result is Z instead of W"). A
+finding without a concrete failing input is a guess — either construct the input or drop the
+finding. Severity is impact × likelihood, ranked so the reader triages worst-first:
+  - CRITICAL: silent data corruption, money/safety wrong, or security-relevant, on a path that
+    runs in normal use.
+  - HIGH: wrong result or crash on a common/default path; corruption only on an uncommon path.
+  - MEDIUM: wrong behavior on an edge case (empty/boundary/rare input) reachable in practice.
+  - LOW: narrow or cosmetic; needs an unlikely combination to trigger.
+Sort the findings CRITICAL-first; within a severity, most-certain-first. State the sort explicitly.
+When a defect lands in a domain with real-world cost (money, safety, deletion, security),
+implement the fix via fix-design (its reversibility gate applies) rather than inline.
+BANNED: "looks good", "well-structured", "should be fine", "no obvious issues"; a flat unranked
+list; inflating a LOW to CRITICAL to look thorough (severity is defensible or it is wrong). If a
+full pass finds nothing, that is a suspicious result: do a second pass using a different category
+order before reporting. Report honestly if the second pass also finds nothing — but only after it runs.

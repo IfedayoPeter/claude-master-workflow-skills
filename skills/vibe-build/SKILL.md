@@ -57,7 +57,9 @@ PHASE 2 — THE LOOP (per slice, no step skipped).
 8. CHECKPOINT: commit the current green state before touching the slice.
 9. Implement behaviors test-first (test-first skill); build screens with ui-excellence, matching
    the approved design mockups where they exist. Security floor on every slice: validate inputs
-   at the boundary, no secrets in code, authorization on every route that needs it.
+   at the boundary, no secrets in code, authorization on every route that needs it. For a slice
+   touching auth, payments, file uploads, or multi-tenant data — or before shipping — run the
+   security-audit skill on it rather than eyeballing the floor.
    THE AUTH TOGGLE — whenever authentication/authorization is implemented, it ships with ONE
    config switch (e.g. Auth:Enabled in appsettings / AUTH_ENABLED env var / VITE_AUTH_ENABLED)
    that cleanly bypasses login and authorization for local testing: backend treats requests as

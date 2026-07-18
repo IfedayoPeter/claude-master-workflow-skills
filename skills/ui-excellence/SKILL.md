@@ -69,26 +69,44 @@ PHASE B — THE CRAFT SYSTEM (the direction is worthless without this).
     a void), EMPTY (an empty state is a designed moment with the signature element and a
     call to action — never bare "No data"), error, overflow, extreme data (0 and 10,000
     items). Happy-path-only is unfinished.
+11. ACCESSIBILITY IS PART OF CRAFT, NOT A CHECKBOX. Boldness never buys out access. Every
+    text/background pair meets WCAG AA (4.5:1 body, 3:1 for large text and meaningful UI
+    borders) — computed, not eyeballed, in BOTH themes. Color is never the only carrier of
+    meaning (an error is icon + text, not red alone; a chart series has a non-color
+    distinguisher). Every interactive element is keyboard-reachable with a VISIBLE
+    focus-visible style (the depth/glow the direction already defines — not the browser
+    outline removed and nothing put back), hit targets ≥ 24px (≥ 44px on touch), controls
+    have accessible names/labels, images have alt text, and motion respects
+    prefers-reduced-motion (already required in step 9). A gorgeous screen a keyboard or
+    screen-reader user cannot operate is a failed screen, and low-contrast "aesthetic" gray
+    text is a craft defect, not a look.
 
 PHASE C — PREVIEW-FIRST FOR MULTI-SCREEN WORK.
-11. Building or restyling 3+ screens → invoke the ui-design-preview skill FIRST: static
+12. Building or restyling 3+ screens → invoke the ui-design-preview skill FIRST: static
     HTML mockups of every screen in the chosen direction, user approves in the browser,
     THEN implement to match. Never sink a framework build into an unapproved direction.
     Single components/screens may skip straight to implementation but still do Phase A.
 
 PHASE D — SCORED CRITIQUE LOOP (mandatory, minimum two rounds).
-12. Render/preview the result. Critique as a hostile design reviewer and SCORE 1–10 on two
+13. Render/preview the result. Critique as a hostile design reviewer and SCORE 1–10 on two
     axes, in writing:
     - CRAFT: alignment, consistency with the Phase B system, contrast, state coverage.
     - BOLDNESS: "If I screenshot this next to a default ShadCN/Bootstrap admin demo, does
       it look like a different product or the same one with new colors?" Same one = max 5.
+    ACCESSIBILITY (step 11) is a GATE on the CRAFT score, not a third axis: any failed
+    AA contrast pair, missing focus-visible style, keyboard trap, or color-only signal caps
+    CRAFT at 5 until fixed — inaccessible cannot score as well-crafted.
     Either score below 8 → name the three weakest things on the screen, fix them, re-render,
     re-score. First-pass output is a draft by definition. If you cannot render, walk the
-    state matrix + direction rules as a written self-review and say so honestly.
+    state matrix + direction rules + the accessibility list as a written self-review and say
+    so honestly.
 
 OUTPUT per screen/task: the direction statement + signature element (Phase A), the
-hierarchy ranking, the system tokens, the state-matrix coverage list, and the final critique
-scores with what was fixed between rounds.
+hierarchy ranking, the system tokens, the state-matrix coverage list, the accessibility
+checks (AA contrast in both themes, focus-visible, keyboard reach, non-color signals), and
+the final critique scores with what was fixed between rounds.
 BANNED: starting with the token file before Phase A; "clean and modern" as a direction;
 screens with no hero treatment; bare "No data" empty states; linear easing; spinners in a
-void; unscored critiques; shipping below 8/8; "looks good" without a rendered check.
+void; unscored critiques; shipping below 8/8; removing the focus outline without replacing
+it; color as the sole carrier of meaning; low-contrast gray text defended as "aesthetic";
+"looks good" without a rendered check.

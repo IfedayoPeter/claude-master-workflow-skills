@@ -16,30 +16,58 @@ Copy-Item -Force (Join-Path $repo "hooks\master-workflow-reminder.json") (Join-P
 Write-Host "Hook payload copied to $claudeDir\hooks"
 
 # 3. Merge the SessionStart hook into ~/.claude/settings.json (idempotent)
+# Written to run on BOTH Windows PowerShell 5.1 (what `powershell` launches on most Windows
+# boxes) and PowerShell 7+ (`pwsh`). That rules out the ternary operator, pipeline-chain
+# operators, and `ConvertFrom-Json -AsHashtable` (6.1+ only) — so we normalize the parsed JSON
+# into a hashtable by hand and use only 5.1-safe syntax.
 $settingsPath = Join-Path $claudeDir "settings.json"
-$settings = (Test-Path $settingsPath) `
-  ? (Get-Content $settingsPath -Raw | ConvertFrom-Json -AsHashtable) `
-  : @{}
+
+function ConvertTo-HashtableDeep($obj) {
+  if ($null -eq $obj) { return $null }
+  if ($obj -is [System.Collections.IDictionary]) {
+    $h = @{}
+    foreach ($k in $obj.Keys) { $h[$k] = ConvertTo-HashtableDeep $obj[$k] }
+    return $h
+  }
+  if ($obj -is [System.Management.Automation.PSCustomObject]) {
+    $h = @{}
+    foreach ($p in $obj.PSObject.Properties) { $h[$p.Name] = ConvertTo-HashtableDeep $p.Value }
+    return $h
+  }
+  if ($obj -is [System.Collections.IEnumerable] -and $obj -isnot [string]) {
+    return @($obj | ForEach-Object { ConvertTo-HashtableDeep $_ })
+  }
+  return $obj
+}
+
+if (Test-Path $settingsPath) {
+  $raw = Get-Content $settingsPath -Raw
+  $settings = if ([string]::IsNullOrWhiteSpace($raw)) { @{} } else { ConvertTo-HashtableDeep ($raw | ConvertFrom-Json) }
+} else {
+  $settings = @{}
+}
 if (-not $settings.ContainsKey("hooks")) { $settings["hooks"] = @{} }
 if (-not $settings["hooks"].ContainsKey("SessionStart")) { $settings["hooks"]["SessionStart"] = @() }
 
 $already = $false
-foreach ($matcherEntry in $settings["hooks"]["SessionStart"]) {
-  foreach ($h in $matcherEntry["hooks"]) {
+foreach ($matcherEntry in @($settings["hooks"]["SessionStart"])) {
+  foreach ($h in @($matcherEntry["hooks"])) {
     if ($h["command"] -like "*master-workflow-reminder.json*") { $already = $true }
   }
 }
 if ($already) {
   Write-Host "SessionStart hook already configured - skipped."
 } else {
-  $settings["hooks"]["SessionStart"] += @{
+  # Rebuild the array explicitly so a single existing entry (which unwraps to a scalar) still
+  # concatenates correctly on 5.1.
+  $settings["hooks"]["SessionStart"] = @(@($settings["hooks"]["SessionStart"]) + @{
     hooks = @(@{
       type          = "command"
       command       = $hookCommand
       timeout       = 10
       statusMessage = "Loading master-workflow routing rules"
     })
-  }
+  })
   $settings | ConvertTo-Json -Depth 20 | Set-Content $settingsPath -Encoding utf8
   Write-Host "SessionStart hook added to $settingsPath"
 }
