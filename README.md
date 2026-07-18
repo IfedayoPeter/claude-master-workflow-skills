@@ -1,12 +1,14 @@
 # Master Workflow Skills for Claude Code
 
-Nineteen skills: eighteen discipline skills that force rigorous engineering, career, and
-document discipline — verified architecture maps, adversarial bug and security hunts,
-measure-first performance work, behavior-preserving refactors, test-first implementation,
+Twenty-five skills: twenty-four discipline skills that force rigorous engineering, career,
+document, and go-to-market discipline — verified architecture maps, adversarial bug and security
+hunts, measure-first performance work, behavior-preserving refactors, test-first implementation,
 researched PRDs with Azure DevOps-importable backlogs, design-first frontends with
 user-approved mockups, disciplined vibe-coding, honest verification reporting, ATS-verified
-CVs, swap-tested cover letters, evidence-backed interview prep, and recruiter-optimized
-LinkedIn profiles — plus `master-workflow`, the router
+CVs, swap-tested cover letters, evidence-backed interview prep, recruiter-optimized
+LinkedIn profiles, deterministic-retrieval second brains, proven-isolation SaaS conversions,
+signal-driven Clay outreach, self-generating asset pipelines, agentic video editing, and
+Jarvis-style agentic operating systems — plus `master-workflow`, the router
 that dispatches tasks to the right skill, chains them into pipelines, and enforces the
 user-approval gates between them. They were written so smaller/faster models produce work closer to a
 frontier model's, but they sharpen any model.
@@ -15,7 +17,7 @@ Each skill is a forced procedure with a required output format and **banned phra
 work", "looks good", "tests to follow"). The format is the load-bearing part: it makes shallow
 work visibly incomplete rather than just discouraged.
 
-## The 19 skills
+## The 25 skills
 
 | Skill | Use when |
 |---|---|
@@ -37,11 +39,17 @@ work visibly incomplete rather than just discouraged.
 | `cover-letter` | Writing a cover letter for a specific job from the JD + the CV: ranked must-have extraction, a proof map backing every claim with a CV fact, honest handling of missing requirements, a banned-cliché scan, and the swap test — a letter that could be sent to a different company unchanged fails; delivered as a `.docx` + `.pdf` only |
 | `interview-prep` | Preparing for a specific interview from the JD + CV: ranked predicted questions (technical + behavioral), a STAR answer bank built only from real experience, honest gap-defense scripts, researched questions to ask, and a mock-exchange critique of the weak spots |
 | `linkedin-optimizer` | Turning a CV into an optimized LinkedIn profile: recruiter-search keyword map, first-person Headline/About/Experience rewritten to LinkedIn conventions and limits, ordered Skills, and a discoverability/settings checklist — same no-fabrication rule as `ats-cv` |
-| `master-workflow` | The router: dispatch table + tie-breakers deciding which skill fits, the canonical chains (greenfield, existing project, bug report, performance, security, refactor, claim audit, job application), user-approval gates, and composition rules |
+| `2nd-brain-creation` | Building a "second brain" over a workspace: a deterministic (non-LLM) retrieval layer — offline index + reference maps + a router that scores candidate files WITHOUT opening them, opens only the top file, jumps to the one section — under a four-layer model (Applications, Routines, Memory, Skills), with an optional graph; refuses to declare done without a measured A/B token-and-speed win over grep/glob |
+| `saaskit-creation` | Turning any app into a multi-tenant SaaS (or building one): tenancy/isolation-model decision, control-plane vs product-plane split, provisioning AND deprovisioning/purge lifecycle, tenant-scoped identity + RBAC, per-tenant settings, billing/marketplace hook, and a fail-closed isolation proof in both directions; Azure SaaS Dev Kit as the reference implementation |
+| `clay-workflow` | Signal-driven outbound via the Clay CLI: defined offer + disqualifiers, verified (not invented) signals, audit + fit-score, decision-maker enrichment with verified contacts, one-to-one signal-anchored drafts that pass the swap test, and deliverability/compliance guardrails with a human approval gate before any send |
+| `asset-pipeline` | A marketing site where Claude generates its own visual assets (via a generative-media MCP like Higgs Field): clear message + single CTA, one art-direction brief so every asset shares a look, a custom (not recolored-template) layout, and a visual-QA inspection against the brief before shipping |
+| `agentic-video-editor` | Raw footage → finished first cut (cut ums/bad takes, b-roll) or a generated narrative/claymation ad (first-frame/last-frame shots stitched into one story), with a watch-the-result QA pass and a likeness/rights gate — never a blind auto-cut declared done |
+| `agentic-os` | A Jarvis-style command center over an operator's connectors, routines, memory, and skills: four-layer inventory, one source of truth for tasks/calendar, guardrails + audit log + human gate on every write-capable/irreversible action, and orchestration of the other skills |
+| `master-workflow` | The router: dispatch table + tie-breakers deciding which skill fits, the canonical chains (greenfield, existing project, bug report, performance, security, refactor, claim audit, job application, SaaS conversion, go-to-market), user-approval gates, and composition rules |
 
 ## Install
 
-Every install path sets up two things: the **19 skills**, and a **SessionStart hook** that
+Every install path sets up two things: the **25 skills**, and a **SessionStart hook** that
 injects the mandatory routing rules into every session — so Claude routes tasks through the
 skills automatically instead of waiting to be told.
 
@@ -54,7 +62,7 @@ Inside Claude Code:
 /plugin install master-workflow-skills@master-workflow-skills
 ```
 
-Installing the plugin loads all 19 skills AND activates the SessionStart routing hook — no
+Installing the plugin loads all 25 skills AND activates the SessionStart routing hook — no
 settings editing, and uninstalling the plugin cleanly removes both.
 
 ### Option B — Install script (copies skills + merges the hook into your settings)
@@ -97,7 +105,7 @@ or if you installed via manual copy — add this to your project's `CLAUDE.md` (
 ```markdown
 ## Mandatory Skill Usage
 
-When a task matches one of the 19 domains below, invoking the matching skill is **compulsory** —
+When a task matches one of the 25 domains below, invoking the matching skill is **compulsory** —
 do not work from memory/guessing on these task types. Match by task shape, not just by the user
 literally naming the skill. When unsure which skill fits, or a task spans several, invoke
 `master-workflow` first — it routes, chains, and defines the approval gates.
@@ -122,6 +130,12 @@ literally naming the skill. When unsure which skill fits, or a task spans severa
 | Writing a cover letter for a specific job from a JD + CV | `cover-letter` |
 | Preparing for a specific interview from a JD + CV | `interview-prep` |
 | Turning a CV into an optimized LinkedIn profile | `linkedin-optimizer` |
+| Building a second brain / faster-cheaper retrieval over a workspace | `2nd-brain-creation` |
+| Turning an app into a multi-tenant SaaS, or building one (tenancy, provisioning, isolation) | `saaskit-creation` |
+| Signal-driven outbound prospecting/outreach via the Clay CLI | `clay-workflow` |
+| Generating a marketing site with self-generated visual assets | `asset-pipeline` |
+| Editing raw video to a first cut, or generating a narrative/claymation ad | `agentic-video-editor` |
+| Building a Jarvis-style agentic OS / command center over connectors, routines, agents | `agentic-os` |
 | Unsure which skill fits, several apply, or a full pipeline is starting (research → build → verify) | `master-workflow` |
 ```
 

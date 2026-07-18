@@ -29,6 +29,12 @@ DISPATCH TABLE — match by task SHAPE, not by whether the user names a skill:
 | Cover letter / application message for a specific job (JD + CV in hand) | cover-letter |
 | Prepare for a specific interview (JD + CV): likely questions, STAR answers, gap defense | interview-prep |
 | Turn a CV into an optimized LinkedIn profile; recruiter-search discoverability | linkedin-optimizer |
+| Build a second brain over a workspace; make retrieval faster/cheaper than grep/glob | 2nd-brain-creation |
+| Turn an app into a multi-tenant SaaS, or build one; tenancy/provisioning/isolation | saaskit-creation |
+| Signal-driven outbound prospecting/outreach via the Clay CLI | clay-workflow |
+| Generate a marketing site with self-generated visual assets (Higgs Field etc.) | asset-pipeline |
+| Edit raw video to a first cut, or generate a narrative/claymation ad | agentic-video-editor |
+| Build a Jarvis-style agentic OS / command center over connectors, routines, agents | agentic-os |
 
 TIE-BREAKERS (the common confusions, decided):
 - Defect KNOWN (you can state "input X produces wrong Z") → fix-design. Defect only SUSPECTED or
@@ -56,6 +62,16 @@ TIE-BREAKERS (the common confusions, decided):
   JD) then cover-letter. "Improve my CV" with no target job → ats-cv alone. interview-prep is
   the third step (once shortlisted); linkedin-optimizer is the standing-profile companion, run
   any time, not tied to one JD.
+- 2nd-brain-creation builds a deterministic RETRIEVAL layer over a workspace (index + router,
+  proven by a token/speed A/B); arch-recon maps ONE codebase's architecture. "Find my files
+  faster/cheaper across everything" → 2nd-brain-creation; "how does this system work" → arch-recon.
+- saaskit-creation is the primary owner of a SaaS conversion; it composes arch-recon (unfamiliar
+  app), security-audit (the tenancy/auth surface), test-first (each new behavior), and
+  durability-check. "Make this multi-tenant / turn this into a SaaS" → saaskit-creation.
+- clay-workflow (outbound prospecting), asset-pipeline (self-generated marketing sites),
+  agentic-video-editor (raw footage → cut, or generated ads), and agentic-os (the command center
+  that orchestrates the others) are the go-to-market/creative cluster. agentic-os is the primary
+  when the ask is a unified command center; it invokes the other three at defined points.
 
 CANONICAL CHAINS (the position each skill occupies in a pipeline):
 1. GREENFIELD PRODUCT: product-recon (PRD + data dictionary + DevOps backlog) → GATE (user
@@ -86,6 +102,13 @@ CANONICAL CHAINS (the position each skill occupies in a pipeline):
    per target job: ats-cv Phase 3 tailoring → cover-letter (proof map, swap test) → GATE (user
    reviews both artifacts before anything is submitted anywhere) → on shortlist, interview-prep
    (JD + CV). linkedin-optimizer runs independently whenever the profile needs it.
+9. SAAS CONVERSION: arch-recon (if the app is unfamiliar) → saaskit-creation (tenancy-model GATE,
+   plane split, provisioning + deprovisioning, RBAC, settings, billing) → security-audit on the
+   tenancy/auth surface → isolation proof (fail-closed, both directions) → durability-check.
+10. GO-TO-MARKET / CREATIVE: agentic-os owns the command center and orchestrates — clay-workflow
+    (prospecting; GATE before send) → asset-pipeline (the proof site/asset) and/or
+    agentic-video-editor (the creative), each with its own QA/watch gate. Run any of the three
+    standalone when there is no command center. 2nd-brain-creation supplies the memory layer.
 
 GATES — stop and wait for the user; never roll through:
 - After product-recon: the PRD must be APPROVED before vibe-build starts.
